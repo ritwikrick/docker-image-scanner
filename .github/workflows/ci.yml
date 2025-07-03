@@ -43,11 +43,15 @@ jobs:
       with:
         go-version: 1.23.0
 
-    - name: Run golangci-lint (without typecheck)
+    - name: Download dependencies
+      run: go mod tidy && go mod download
+
+    - name: Run golangci-lint
       uses: golangci/golangci-lint-action@v6
       with:
         version: v1.56.2
-        args: "--disable typecheck"
+        args: "--timeout 3m"
+
 
 
   push:
