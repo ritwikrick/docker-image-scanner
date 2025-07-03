@@ -42,6 +42,7 @@ jobs:
       uses: golangci/golangci-lint-action@v6
       with:
         version: v1.56.2
+        install-mode: binary
 
   push:
     runs-on: ubuntu-latest
