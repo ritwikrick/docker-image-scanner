@@ -1,4 +1,4 @@
-FROM golang:1.23
+FROM golang:1.22.3
 
 # Install Trivy dependencies and Trivy itself
 RUN apt-get update && apt-get install -y wget apt-transport-https gnupg lsb-release && \
