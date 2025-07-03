@@ -1,4 +1,4 @@
 image:
   repository: ritwikrick/docker-image-scanner
-  tag: "16045007004"
+  tag: "16055711167"
   pullPolicy: IfNotPresent
