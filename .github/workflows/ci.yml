@@ -32,17 +32,24 @@ jobs:
       run: go test ./...
 
   code-quality:
-    runs-on: ubuntu-latest
+  runs-on: ubuntu-latest
 
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+  steps:
+  - name: Checkout repository
+    uses: actions/checkout@v4
 
-    - name: Run golangci-lint
-      uses: golangci/golangci-lint-action@v6
-      with:
-        version: v1.56.2
-        install-mode: binary
+  - name: Set up Go 1.23.0
+    uses: actions/setup-go@v2
+    with:
+      go-version: 1.23.0
+
+  - name: Download dependencies
+    run: go mod download
+
+  - name: Run golangci-lint
+    uses: golangci/golangci-lint-action@v6
+    with:
+      version: v1.56.2
 
   push:
     runs-on: ubuntu-latest
@@ -69,7 +76,6 @@ jobs:
         push: true
         tags: |
           ${{ secrets.DOCKERHUB_USERNAME }}/docker-image-scanner:${{ github.run_id }}
-          ${{ secrets.DOCKERHUB_USERNAME }}/docker-image-scanner:latest
 
   update-newtag-in-helm-chart:
     runs-on: ubuntu-latest
