@@ -30,7 +30,7 @@ jobs:
 
     - name: Test
       run: go test ./...
-      
+
   push:
     runs-on: ubuntu-latest
     needs: build
@@ -56,7 +56,7 @@ jobs:
         push: true
         tags: |
           ${{ secrets.DOCKERHUB_USERNAME }}/docker-image-scanner:${{ github.run_id }}
-          ${{ secrets.DOCKERHUB_USERNAME }}/docker-image-scanner:latest
+
 
   update-newtag-in-helm-chart:
     runs-on: ubuntu-latest
