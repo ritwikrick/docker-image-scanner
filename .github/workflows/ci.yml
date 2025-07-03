@@ -32,9 +32,9 @@ jobs:
       run: go test ./...
 
   code-quality:
-    runs-on: ubuntu-latest
+  runs-on: ubuntu-latest
 
-    steps:
+  steps:
     - name: Checkout repository
       uses: actions/checkout@v4
 
@@ -43,13 +43,14 @@ jobs:
       with:
         go-version: 1.23.0
 
-    - name: Download dependencies
-      run: go mod download
+    - name: Download Go modules
+      run: go mod tidy && go mod download
 
     - name: Run golangci-lint
       uses: golangci/golangci-lint-action@v6
       with:
         version: v1.56.2
+        args: "--timeout 5m"
 
   push:
     runs-on: ubuntu-latest
