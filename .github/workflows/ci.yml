@@ -31,28 +31,23 @@ jobs:
     - name: Test
       run: go test ./...
 
-  code-quality:
-    runs-on: ubuntu-latest
+ code-quality:
+  runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-      - name: Set up Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: 1.23.0
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: 1.23.0
 
-      - name: Download dependencies
-        run: |
-          go mod tidy
-          go mod download
+    - name: Run golangci-lint
+      uses: golangci/golangci-lint-action@v6
+      with:
+        version: v1.56.2
 
-      - name: Run golangci-lint
-        uses: golangci/golangci-lint-action@v6
-        with:
-          version: v1.56.2
-          args: "--timeout 5m"
 
   push:
     runs-on: ubuntu-latest
