@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docker-image-scanner
+  labels:
+    app: docker-image-scanner
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: docker-image-scanner
+  template:
+    metadata:
+      labels:
+        app: docker-image-scanner
+    spec:
+      containers:
+      - name: docker-image-scanner
+        image: ritwikrick/docker-image-scanner:latest
+        ports:
+        - containerPort: 8080
+
+
+
+

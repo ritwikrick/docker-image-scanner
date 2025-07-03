@@ -1,0 +1,4 @@
+image:
+  repository: ritwikrick/docker-image-scanner
+  tag: latest
+  pullPolicy: IfNotPresent
